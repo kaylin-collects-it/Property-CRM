@@ -1,0 +1,56 @@
+name: Property CRM
+
+on:
+  schedule:
+    # Every 2 hours (GitHub uses UTC; it may start a few minutes late at busy times).
+    - cron: "7 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      client:
+        description: "Run one client only (client1 / client2 / client3), or leave blank for all"
+        required: false
+        default: ""
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110 # finish before the next 2-hourly run starts
+    strategy:
+      fail-fast: false
+      matrix:
+        client: [client1, client2, client3]
+    # Never let two runs for the same client write to its sheet at the same time.
+    concurrency:
+      group: crm-${{ matrix.client }}
+      cancel-in-progress: false
+    steps:
+      - name: Skip clients not selected
+        id: pick
+        run: |
+          if [ -n "${{ github.event.inputs.client }}" ] && [ "${{ github.event.inputs.client }}" != "${{ matrix.client }}" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.pick.outputs.skip != 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.pick.outputs.skip != 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        if: steps.pick.outputs.skip != 'true'
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Update ${{ matrix.client }} sheet
+        if: steps.pick.outputs.skip != 'true'
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          CLIENT1_SHEET_ID: ${{ secrets.CLIENT1_SHEET_ID }}
+          CLIENT2_SHEET_ID: ${{ secrets.CLIENT2_SHEET_ID }}
+          CLIENT3_SHEET_ID: ${{ secrets.CLIENT3_SHEET_ID }}
+        run: node src/run.js --client ${{ matrix.client }}
