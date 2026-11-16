@@ -28,7 +28,17 @@ const SEEN_COL = colLetter(COL.lastSeen);
 function auth() {
   const raw = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
   if (!raw) throw new Error('GOOGLE_SERVICE_ACCOUNT_JSON is not set (see SETUP.md, step 2).');
-  const credentials = JSON.parse(raw);
+  let credentials;
+  try {
+    credentials = JSON.parse(raw.trim());
+  } catch {
+    credentials = null;
+  }
+  if (!credentials || credentials.type !== 'service_account' || !credentials.private_key || !credentials.client_email) {
+    throw new Error(
+      'The GOOGLE_SERVICE_ACCOUNT_JSON secret is not the robot key file. Open the downloaded .json key file in ' +
+      'Notepad, copy ALL of it (it starts with { and contains "type": "service_account") and paste that as the secret.');
+  }
   return new GoogleAuth({ credentials, scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
 }
 
