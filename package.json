@@ -1,0 +1,20 @@
+{
+  "name": "property-crm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scrapes Property24 and Private Property every 2 hours into one Google Sheet per client.",
+  "type": "commonjs",
+  "main": "src/run.js",
+  "scripts": {
+    "start": "node src/run.js",
+    "dry-run": "node src/run.js --dry-run",
+    "setup-sheets": "node src/run.js --setup-only",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@googleapis/sheets": "9.3.1",
+    "google-auth-library": "9.15.1",
+    "playwright": "1.63.0"
+  }
+}
