@@ -13,7 +13,7 @@ on:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # pinned: the browser installer supports this version
     timeout-minutes: 110 # finish before the next 2-hourly run starts
     strategy:
       fail-fast: false

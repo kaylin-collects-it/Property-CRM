@@ -46,6 +46,11 @@ This is a special Google login that only the system uses, so it can write into y
 6. Click that email → the **Keys** tab → **Add key** → **Create new key** → choose **JSON** →
    **Create**. A small file downloads to your computer. That's the robot's key.
    Keep it private: don't email it to anyone.
+   > **"Key creation is blocked by your organization"?** Work/business Google accounts block
+   > key files by default. Easiest fix: open an incognito window, sign in to
+   > console.cloud.google.com with a **personal Gmail account** and repeat steps 2–6 there.
+   > Your sheets can stay in your work account; you just share them with the robot's email
+   > (next step).
 7. Go back to each of your 3 sheets → click **Share** (top right) → paste the robot's email →
    set it to **Editor** → untick "Notify people" → **Share**.
 

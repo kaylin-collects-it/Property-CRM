@@ -1,0 +1,63 @@
+{
+  "settings": {
+    "minimumListingAgeMonths": 3,
+    "excludeAgenciesMatching": ["jawitz"],
+    "requestDelayMs": 4000,
+    "maxDetailPagesPerRun": 500,
+    "maxResultPagesPerArea": 150,
+    "timezone": "Africa/Johannesburg"
+  },
+
+  "clients": [
+    {
+      "key": "client1",
+      "name": "Client 1 - Bryanston",
+      "sheetIdEnv": "CLIENT1_SHEET_ID",
+      "property24": [
+        { "area": "Bryanston",       "url": "https://www.property24.com/for-sale/bryanston/sandton/gauteng/5176" },
+        { "area": "Bryanston East",  "url": "https://www.property24.com/for-sale/bryanston-east/sandton/gauteng/4272" },
+        { "area": "Bryanston West",  "url": "https://www.property24.com/for-sale/bryanston-west/sandton/gauteng/5226" },
+        { "area": "Epsom Downs",     "url": "https://www.property24.com/for-sale/epsom-downs/sandton/gauteng/4273" },
+        { "area": "Kleve Hill Park", "url": "https://www.property24.com/for-sale/klevehill-park/sandton/gauteng/4269" }
+      ],
+      "privateproperty": [
+        { "area": "Bryanston (incl. Bryanston East & Mill Hill)", "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/bryanston/238" },
+        { "area": "Epsom Downs",     "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/epsom-downs/6801" },
+        { "area": "Kleve Hill Park", "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/klevehill-park/6808" }
+      ]
+    },
+    {
+      "key": "client2",
+      "name": "Client 2 - Edenburg, Woodmead, Rivonia",
+      "sheetIdEnv": "CLIENT2_SHEET_ID",
+      "property24": [
+        { "area": "Edenburg", "url": "https://www.property24.com/for-sale/edenburg/sandton/gauteng/4253" },
+        { "area": "Woodmead", "url": "https://www.property24.com/for-sale/woodmead/sandton/gauteng/4288" },
+        { "area": "Rivonia",  "url": "https://www.property24.com/for-sale/rivonia/sandton/gauteng/4251" }
+      ],
+      "privateproperty": [
+        { "area": "Edenburg", "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/edenburg/1518" },
+        { "area": "Woodmead", "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/woodmead/1085" },
+        { "area": "Rivonia",  "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/rivonia/244" }
+      ]
+    },
+    {
+      "key": "client3",
+      "name": "Client 3 - Lone Hill, Pineslopes, Beverley, Craigavon, Maroeladal",
+      "sheetIdEnv": "CLIENT3_SHEET_ID",
+      "property24": [
+        { "area": "Lone Hill",  "url": "https://www.property24.com/for-sale/lonehill/sandton/gauteng/5247" },
+        { "area": "Pineslopes", "url": "https://www.property24.com/for-sale/pineslopes/sandton/gauteng/5173" },
+        { "area": "Beverley",   "url": "https://www.property24.com/for-sale/beverley/sandton/gauteng/5248" },
+        { "area": "Craigavon",  "url": "https://www.property24.com/for-sale/craigavon/sandton/gauteng/3913" },
+        { "area": "Maroeladal", "url": "https://www.property24.com/for-sale/maroeladal/randburg/gauteng/4453" }
+      ],
+      "privateproperty": [
+        { "area": "Lone Hill (incl. Pineslopes)", "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/lonehill/372" },
+        { "area": "Beverley",   "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/beverley/1485" },
+        { "area": "Craigavon",  "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/sandton/craigavon/772" },
+        { "area": "Maroeladal", "url": "https://www.privateproperty.co.za/for-sale/gauteng/johannesburg/randburg/maroeladal/2010" }
+      ]
+    }
+  ]
+}
