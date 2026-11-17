@@ -119,11 +119,16 @@ async function runClient(client, { portals, http, settings, store, today }) {
 
   // 1. Scan results pages.
   const cards = new Map();
+  const portalDown = new Set();
   for (const portal of portals) {
     const areas = client[portal.configKey] || [];
     if (!areas.length) continue;
     const allowed = portal.allowedSet(areas);
     for (const area of areas) {
+      if (portalDown.has(portal.NAME)) {
+        log(`  ${portal.NAME} ${area.area}: skipped (portal refused earlier requests this run)`);
+        continue;
+      }
       try {
         const found = await portal.scanArea(area, {
           http, allowedSuburbIds: allowed, allowedSuburbs: allowed,
@@ -132,6 +137,9 @@ async function runClient(client, { portals, http, settings, store, today }) {
         for (const c of found) cards.set(keyOf(c.portal, c.id), c);
       } catch (err) {
         log(`  !! ${portal.NAME} ${area.area} failed: ${err.message}`);
+        // If a portal is refusing us even after retries, stop asking it for the rest of
+        // this run: it saves time and doesn't keep knocking on a closed door.
+        portalDown.add(portal.NAME);
       }
     }
   }
